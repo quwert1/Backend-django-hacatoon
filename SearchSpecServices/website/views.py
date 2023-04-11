@@ -67,5 +67,6 @@ def show_post(request, post_id):
     context = {
         'post': post,
         'title': post.title,
+        'category_selected': post.category_id,
     }
     return render(request, 'website/post.html', context=context)

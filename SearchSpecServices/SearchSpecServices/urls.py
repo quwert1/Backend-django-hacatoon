@@ -14,7 +14,7 @@ urlpatterns = [
     # path('catalogIT/', CatalogIT.as_view(), name='catalogIT'),
     path('catalogIT/', catalog, name='catalogIT'),
     path('category/<int:cat_id>/', show_category, name='category'),
-    path('post/<int:cat_id>/', show_post, name='post')
+    path('post/<int:post_id>/', show_post, name='post')
 ]
 
 if settings.DEBUG:

@@ -26,15 +26,17 @@
 <ul class="box-catalog">
     {% for p in posts %}
     <li class="el">
-        <div class="left-content">
-            <h2>{{p.title}}</h2>
-            <p class="content">{{p.content}}</p>
-        </div>
-        <div class="right-content">
-            <h4>{{p.price}}₽</h4>
-            <p>Сроки до: {{p.time_over}}</p>
-            <p class="category">{{p.category}}</p>
-        </div>
+        <a href="{{p.get_absolute_url}}">
+            <div class="left-content">
+                <h2>{{p.title}}</h2>
+                <p class="content">{{p.content}}</p>
+            </div>
+            <div class="right-content">
+                <h4>{{p.price}}₽</h4>
+                <p>Сроки до: {{p.time_over}}</p>
+                <p class="category">{{p.category}}</p>
+            </div>
+        </a>
     </li>
     {% endfor %}
 </ul>
