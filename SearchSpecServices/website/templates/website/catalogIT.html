@@ -1,0 +1,41 @@
+{% extends 'website/base.html' %}
+
+
+{% block task_list %}
+<input type="checkbox" id="filter-input">
+<label for="filter-input" class="filter-label">Фильтр</label>
+
+<div class="filter-elements">
+    <ul>
+        {% if cat_selected == 0 %}
+        <li class="selected">Все категории</li>
+        {% else %}
+        <li><a href="{% url 'catalogIT' %}">Все категории</a></li>
+        {% endif %}
+
+        {% for c in cats %}
+            {% if c.pk == cat_selected %}
+            <li class="selected">{{c.name}}</li>
+            {% else %}
+            <li><a href="{{c.get_absolute_url}}">{{c.name}}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+
+<ul class="box-catalog">
+    {% for p in posts %}
+    <li class="el">
+        <div class="left-content">
+            <h2>{{p.title}}</h2>
+            <p class="content">{{p.content}}</p>
+        </div>
+        <div class="right-content">
+            <h4>{{p.price}}₽</h4>
+            <p>Сроки до: {{p.time_over}}</p>
+            <p class="category">{{p.category}}</p>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock task_list %}
