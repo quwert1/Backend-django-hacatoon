@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
+
 
 class TaskIT(models.Model):
     title = models.CharField(max_length=255)
@@ -13,6 +15,8 @@ class TaskIT(models.Model):
     place = models.CharField(max_length=255)
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+    username = 'LoginUser'
+
 
     def __str__(self):
         return self.title
@@ -39,3 +43,6 @@ class Category(models.Model):
         verbose_name_plural = 'Категории'
         ordering = ['name']
 
+class LoginUser(AuthenticationForm):
+    username = models.CharField(max_length=255)
+    password = models.CharField(max_length=255)

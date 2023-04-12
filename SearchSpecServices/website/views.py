@@ -9,6 +9,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import generics, viewsets, mixins
+from django.contrib.auth.forms import AuthenticationForm
 
 from .models import *
 from .forms import *
@@ -41,7 +42,7 @@ class RegisterUserCustomer(DataMixin, CreateView):
         return redirect('catalogIT')
 
 class RegisterUserPerformer(DataMixin, CreateView):
-    role = 'Заказчик'
+    role = 'Исполнитель'
     form_class = RegisterUserPerformerForm
     template_name = 'website/registrationPerformer.html'
     success_url = reverse_lazy('sign_up')
@@ -54,7 +55,7 @@ class RegisterUserPerformer(DataMixin, CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('catalogIT')
+        return redirect('catalogIT_perf')
 
 class LoginUser(DataMixin, LoginView):
     form_class = LoginUserForm
@@ -76,33 +77,38 @@ def logout_user(request):
     return redirect('home')
 
 
-# class CatalogIT(ListView):
-#     model = TaskIT
-#     template_name = 'website/catalogIT.html'
-#     context_object_name = 'posts'
-#     paginate_by = 15
+class CatalogIT(ListView):
+    model = TaskIT
+    template_name = 'website/catalogIT.html'
+    context_object_name = 'posts'
+    paginate_by = 15
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Каталог заказов IT'
+        context['cats'] = Category.objects.all()
+        context['username'] = LoginUser.objects.all()
+        context['cat_selected'] = 0
+        return context
+
+class CatalogIT_perf(ListView):
+    model = TaskIT
+    template_name = 'website/catalogIT_perf.html'
+    context_object_name = 'posts'
+    paginate_by = 15
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Каталог заказов IT'
+        context['cats'] = Category.objects.all()
+        context['cat_selected'] = 0
+        return context
+
 #
-#     def get_context_data(self, *, object_list=None, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Каталог заказов IT'
-#         context['cats'] = Category.objects.all()
-#         context['cat_selected'] = 0
-#         return context
-
-
-# class CatalogAPIList(generic.ListCreateAPIView):
+# class TaskITAPIList(generics.ListCreateAPIView):
 #     queryset = TaskIT.objects.all()
-#
-#
-# class CatalogAPIUpdate(generic.RetrieveUpdateAPIView):
-
-
-
-
-class TaskITAPIList(generics.ListCreateAPIView):
-    queryset = TaskIT.objects.all()
-    serializer_class = TaskITSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly, )
+#     serializer_class = TaskITSerializer
+#     permission_classes = (IsAdminOrReadOnly, )
 
 
 class TaskITAPIUpdate(generics.RetrieveUpdateAPIView):
@@ -115,11 +121,6 @@ class TaskITAPIDestroy(generics.RetrieveDestroyAPIView):
     queryset = TaskIT.objects.all()
     serializer_class = TaskITSerializer
     permission_classes = (IsAdminOrReadOnly, )
-
-
-
-
-
 
 
 def show_category(request, cat_id):
@@ -148,13 +149,31 @@ def show_post(request, post_id):
     }
     return render(request, 'website/post.html', context=context)
 
+def show_post_cust(request, post_id):
+    # post_cust = get_object_or_404(TaskIT, pk=post_id)
+    user_post = get_object_or_404(TaskIT, User=user)
+
+    context = {
+        'user_posts': user_post,
+        'title': user_post.title,
+        'category_selected': post_cust.category_id,
+    }
+    return render(request, 'website/post_cust.html', context=context)
+
+# class AddTaskIT(CreateView, generics.RetrieveDestroyAPIView):
+#     form_class = AddTaskIT_Form
+#     template_name = 'website/add_taskIT.html'
+#
+#     queryset = TaskIT.objects.all()
+#     serializer_class = TaskITSerializer
+#     permission_classes = (IsAdminOrReadOnly,)
 
 def add_taskIT (request):
     if request.method == 'POST':
         form = AddTaskIT_Form(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('catalogIT')
+            return redirect('catalogIT_cust')
     else:
         form = AddTaskIT_Form()
     return render(request, 'website/add_taskIT.html', {'title': 'Add article', 'form': form})

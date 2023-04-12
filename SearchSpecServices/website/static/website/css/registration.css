@@ -4,6 +4,10 @@ body {
 	font-family: 'Roboto';
 }
 
+* {
+	/*border: 1px solid red;*/
+}
+
 body {
   background-image: linear-gradient(135deg, #3A3E87 9.38%, #0D2C65 32.81%, #0E1045 69.22%, #221245 98.44%);
   background-size: 100vw 100vh;
@@ -18,7 +22,7 @@ h1 {
 
 .reg-form-block {
 	width: 50vw;
-	height: 60vh;
+	height: 76vh;
 	background-color: #0E1045;
 	padding: 30px;
 	box-sizing: border-box;
@@ -68,8 +72,7 @@ h1 {
     flex-wrap: wrap;
 	justify-content: center;
 	align-items: space-between;
-    column-gap: 70px;
-	row-gap: 30px;
+    column-gap: 20px;
 }
 .reg-form label {
 	display: block;
@@ -132,7 +135,6 @@ h1 {
   width: 431px;
   height: 579.25px;
   right: 0;
-  /* left: 1521px; */
   top: 85px;
   
 }

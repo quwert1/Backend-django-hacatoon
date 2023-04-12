@@ -1,0 +1,30 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+<div class="wrap-card">
+    <div class="back">
+        <input type="button" onclick="history.back();" value="Назад"/>
+    </div>
+    <div class="wrap-content-el">
+            <div class="top-content">
+                <h2>{{post.title}}</h2>
+                <p class="content">{{post.content}}</p>
+            </div>
+            <div class="bottom-content">
+                <div class="left-el">
+                    <p class="category task-object">{{post.category}}</p>
+                    <p class="time_over task-object">до {{post.time_over}}</p>
+                    <p class="place task-object">{{post.place}}</p>
+                </div>
+                <div class="right-el">
+                    <p class="price task-object">{{post.price}}р</p>
+                </div>
+            </div>
+            <div class="customer">
+                <div class="customer-info">
+                    {{post.user}}
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock %}

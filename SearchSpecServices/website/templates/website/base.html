@@ -7,6 +7,7 @@
     <title>{{title}}</title>
     <link rel="stylesheet" href="{% static 'website/css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'website/css/catalog.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/post.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -16,7 +17,7 @@
     <nav>
         <div class="container">
             <div class="logo">
-                <a href="{% url 'catalogIT' %}" class="logo-url">
+                <a href="{% url 'catalogIT_cust' %}" class="logo-url">
                     <img src="{% static 'website/img/logo_kach.svg' %}" alt="">
                     <div class="logo-text">
                         <p>Search</p>
@@ -27,7 +28,7 @@
             </div>
 
             <ul class="nav-links">
-                <li><a href="{% url 'catalogIT' %}">Каталог</a></li>
+                <li><a href="{% url 'catalogIT_cust' %}">Каталог</a></li>
                 <li><a href="{% url 'add_taskIT' %}">Создать объявление</a></li>
                 <li><a href="{% url 'about_us' %}">О нас</a></li>
                 <li class="user-auth-block">

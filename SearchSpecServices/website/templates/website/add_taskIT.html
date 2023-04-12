@@ -1,5 +1,37 @@
 {% extends 'website/base.html' %}
+{% load static %}
 
+{% block navcontent %}
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="{% url 'catalogIT_cust' %}" class="logo-url">
+                    <img src="{% static 'website/img/logo_kach.svg' %}" alt="">
+                    <div class="logo-text">
+                        <p>Search</p>
+                        <p>Specialists</p>
+                        <p>Services</p>
+                    </div>
+                </a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="{% url 'catalogIT_cust' %}">Мои объявления</a></li>
+                <li><a href="{% url 'add_taskIT' %}">Создать объявление</a></li>
+                <li><a href="{% url 'about_us' %}">О нас</a></li>
+                <li class="user-auth-block">
+                    {% if request.user.is_authenticated %}
+                    <li>{{user.username}} | <a href="{% url 'profile' %}">профиль</a></li>
+                    {% else %}
+                    <a href="{% url 'registration' %}">Зарегестрироваться</a>
+                    <span>|</span>
+                    <a href="{% url 'sign_up' %}">Войти</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% endblock navcontent %}
 
 {% block form %}
 <form action="{% url 'add_taskIT' %}" method="post">

@@ -1,7 +1,3 @@
-* {
-    /* border: 1px solid red; */
-}
-
 .wrapp-catalog {
     background-color: white;
     border-top-right-radius: 20px;
@@ -103,12 +99,12 @@
     border-top: 2px solid #D9D9D9;
 }
 
-.box-catalog .el {
+.el {
     border: 2px solid #D9D9D9;
     border-radius: 20px;
     padding: 15px;
 }
-.box-catalog .el a {
+.el a {
     text-decoration: none;
     color: black;
     display: flex;
@@ -118,12 +114,12 @@
     align-items: top;
     gap: 20px;
 }
-.box-catalog .top-content h2 {
+.top-content h2 {
     color: #342E90;
     margin-bottom: 10px;
     font-size: 20px;
 }
-.box-catalog .top-content p {
+.top-content p {
     font-weight: bold;
     font-size: 16px;
 }
@@ -136,7 +132,7 @@
     display: flex;
     gap: 10px;
 }
-.box-catalog .task-object {
+.task-object {
     display: inline-block;
     text-decoration: none;
     color: #342E90;
@@ -144,7 +140,6 @@
     background-color: #D9D9D9;
     border-radius: 12px;
 }
-
 
 
 

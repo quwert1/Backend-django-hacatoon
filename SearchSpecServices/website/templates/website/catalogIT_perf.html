@@ -5,7 +5,7 @@
     <nav>
         <div class="container">
             <div class="logo">
-                <a href="{% url 'catalogIT_cust' %}" class="logo-url">
+                <a href="{% url 'catalogIT_perf' %}" class="logo-url">
                     <img src="{% static 'website/img/logo_kach.svg' %}" alt="">
                     <div class="logo-text">
                         <p>Search</p>
@@ -16,8 +16,7 @@
             </div>
 
             <ul class="nav-links">
-                <li><a href="{% url 'catalogIT_cust' %}">Мои объявления</a></li>
-                <li><a href="{% url 'add_taskIT' %}">Создать объявление</a></li>
+                <li><a href="{% url 'catalogIT_perf' %}">Каталог</a></li>
                 <li><a href="{% url 'about_us' %}">О нас</a></li>
                 <li class="user-auth-block">
                     {% if request.user.is_authenticated %}
@@ -32,14 +31,11 @@
         </div>
     </nav>
     {% endblock navcontent %}
-
 {% block task_list %}
 <div class="wrapp-catalog">
-    <a href="{% url 'add_taskIT' %}" class="add_task">Создать объявление</a>
-    
     <ul class="box-catalog">
         <div class="top-catalog-menu">
-            <h2>Мои объявления</h2>
+            <h2>Действующие объявления</h2>
             <div class="filter-box">
                 <input type="checkbox" id="filter-input">
                 <label for="filter-input" class="filter-label">Фильтр <span class="chevrone">></span></label>
@@ -49,7 +45,7 @@
                         {% if cat_selected == 0 %}
                         <li class="selected">Все категории</li>
                         {% else %}
-                        <li><a href="{% url 'catalogIT_cust' %}">Все категории</a></li>
+                        <li><a href="{% url 'catalogIT' %}">Все категории</a></li>
                         {% endif %}
 
                         {% for c in cats %}
@@ -65,8 +61,6 @@
         </div>
         <ul class="block-catalog-links">
             {% for p in posts %}
-            {{username}}
-            {% if p.user == username %}
             <li class="el">
                 <a href="{{p.get_absolute_url}}">
                     <div class="top-content">
@@ -86,8 +80,6 @@
                 </a>
             </li>
             <div class="cut"></div>
-            {% else %}
-            {% endif %}
             {% endfor %}
         </ul>
 

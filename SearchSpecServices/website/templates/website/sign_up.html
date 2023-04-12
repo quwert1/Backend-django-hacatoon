@@ -18,7 +18,7 @@
     <form method="post" class="reg-form auth-form">
         {% csrf_token %}
 
-        <div class="form-error">{{ form.non_field_errors }}</div>
+        <div class="form-error">{{ form.non_field_errors|truncatechars:92 }}</div>
 
         {% for f in form %}
         <p class="input-reg-el input-auth-el"><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
