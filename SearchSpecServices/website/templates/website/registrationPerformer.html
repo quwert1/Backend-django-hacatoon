@@ -4,60 +4,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="{% static 'website/css/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/catalog.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'website/css/registration.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>{{title}}</title>
 </head>
 <body>
-    {% block navcontent %}
-    <nav>
-        <div class="container">
-            <div class="logo">
-                <a href="{% url 'catalogIT' %}" class="logo-url">
-                    <img src="{% static 'website/img/logo_kach.svg' %}" alt="">
-                    <div class="logo-text">
-                        <p>Search</p>
-                        <p>Specialists</p>
-                        <p>Services</p>
-                    </div>
-                </a>
-            </div>
+    
+<h1>{{title}}</h1>
+<div class="reg-form-block">
+    <div class="choose-role-block">
+        <a href="{% url 'registration' %}" class="choose-el-reg">Заказчик</a>
+        <p class="choose-el-reg active-el-reg">Исполнитель</p>
+    </div>
+    <form method="post" class="reg-form">
+        {% csrf_token %}
+        {% for f in form %}
+        <p class="input-reg-el"><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+        <div class="form-error">{{ f.errors }}</div>
+        {% endfor %}
+        <button type="submit">Зарегестрироваться</button>
 
-            <ul class="nav-links">
-                <li><a href="{% url 'catalogIT' %}">Каталог</a></li>
-                <li><a href="{% url 'add_taskIT' %}">Создать объявление</a></li>
-                <li><a href="{% url 'about_us' %}">О нас</a></li>
-                <li class="user-auth-block">
-                    {% if request.user.is_authenticated %}
-                    <li>{{user.username}} | <a href="{% url 'profile' %}">профиль</a></li>
-                    {% else %}
-                    <a href="{% url 'registration' %}">Зарегестрироваться</a>
-                    <span>|</span>
-                    <a href="{% url 'sign_up' %}">Войти</a>
-                    {% endif %}
-                </li>
-            </ul>
-        </div>
-    </nav>
-    {% endblock navcontent %}
-
-    {% block form %}
-    {% endblock form %}
-
-    {% block task_list %}
-    {% endblock task_list %}
-
-    {% block content %}
-    {% endblock content %}
-
-    {% block profile %}
-    {% endblock profile %}
+        <a href="{% url 'sign_up' %}" class="login-if-us-reg">Есть аккаунт? Войти</a>
+    </form>
+</div>
 
 
-<svg xmlns="http://www.w3.org/2000/svg" width="367" height="521" viewBox="0 0 367 521" fill="none" class="cloud1">
+
+
+ <svg xmlns="http://www.w3.org/2000/svg" width="367" height="521" viewBox="0 0 367 521" fill="none" class="cloud1">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M85.7046 50.0447C109.871 46.9738 144.301 44.3434 155.516 65.9406C169.078 92.0572 130.439 122.154 137.924 150.608C143.381 171.351 181.94 168.499 187.915 189.099C193.454 208.201 176.584 226.817 164.64 242.729C152.017 259.546 138.464 280.275 117.573 282.811C96.5954 285.358 82.1556 261.395 61.9554 255.197C42.1481 249.12 9.26522 266.439 1.57707 247.223C-7.55056 224.409 25.6156 205.568 32.6846 182.036C35.8791 171.403 31.6417 160.531 30.9484 149.451C29.5196 126.612 15.4032 102.392 26.4474 82.3416C37.5174 62.2446 62.9205 52.9399 85.7046 50.0447Z" fill="#5358B4"/>
     <path fill-rule="evenodd" clip-rule="evenodd" d="M22.2272 190.7C20.5601 182.157 29.126 174.674 28.7381 165.981C28.1234 152.202 12.435 138.436 19.3643 126.532C25.5929 115.832 42.8888 119.408 55.2144 120.496C65.3216 121.388 76.0972 124.396 82.7023 132.123C88.709 139.15 86.1284 149.724 87.9486 158.79C88.9233 163.645 88.57 168.679 90.9171 173.039C95.9694 182.425 108.188 187.817 109.28 198.42C110.505 210.32 106.22 223.824 96.9135 231.298C87.4565 238.893 73.2369 240.34 61.6739 236.65C50.6659 233.137 45.34 221.212 37.8034 212.433C31.8786 205.531 23.9699 199.63 22.2272 190.7Z" fill="white"/>
     <g filter="url(#filter0_d_35_2)">

@@ -2,42 +2,73 @@
 
 
 {% block task_list %}
-<input type="checkbox" id="filter-input">
-<label for="filter-input" class="filter-label">Фильтр</label>
+<div class="wrapp-catalog">
+    <!-- <h1>Каталог заказов IT</h1> -->
+    
+    <ul class="box-catalog">
 
-<div class="filter-elements">
-    <ul>
-        {% if cat_selected == 0 %}
-        <li class="selected">Все категории</li>
-        {% else %}
-        <li><a href="{% url 'catalogIT' %}">Все категории</a></li>
-        {% endif %}
+        <div class="top-catalog-menu">
+            <h2>Действующие объявления</h2>
+            <div class="filter-box">
+                <input type="checkbox" id="filter-input">
+                <label for="filter-input" class="filter-label">Фильтр <span class="chevrone">></span></label>
 
-        {% for c in cats %}
-            {% if c.pk == cat_selected %}
-            <li class="selected">{{c.name}}</li>
+                <div class="filter-elements">
+                    <ul>
+                        {% if cat_selected == 0 %}
+                        <li class="selected">Все категории</li>
+                        {% else %}
+                        <li><a href="{% url 'catalogIT' %}">Все категории</a></li>
+                        {% endif %}
+
+                        {% for c in cats %}
+                        {% if c.pk == cat_selected %}
+                        <li class="selected">{{c.name}}</li>
+                        {% else %}
+                        <li><a href="{{c.get_absolute_url}}">{{c.name}}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <ul class="block-catalog-links">
+            {% for p in posts %}
+            <li class="el">
+                <a href="{{p.get_absolute_url}}">
+                    <div class="top-content">
+                        <h2>{{p.title|truncatechars:60}}</h2>
+                        <p class="content">{{p.content|truncatechars:200}}</p>
+                    </div>
+                    <div class="bottom-content">
+                        <div class="left-el">
+                            <p class="category task-object">{{p.category}}</p>
+                            <p class="time_over task-object">до {{p.time_over}}</p>
+                            <p class="place task-object">{{p.place}}</p>
+                        </div>
+                        <div class="right-el">
+                            <p class="price task-object">{{p.price}}р</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <div class="cut"></div>
+            {% endfor %}
+        </ul>
+
+        {% if page_obj.has_other_pages %}
+        <ul class="list-pages">
+            {% for p in paginator.page_range %}
+            {% if page.obj_number == p %}
+            <li class="selected-page page-num">{{p}}</li>
             {% else %}
-            <li><a href="{{c.get_absolute_url}}">{{c.name}}</a></li>
+            <li class="page-num">
+                <a href="?page={{p}}">{{ p }}</a>
+            </li>
             {% endif %}
-        {% endfor %}
+            {% endfor %}
+        </ul>
+        {% endif %}
     </ul>
 </div>
-
-<ul class="box-catalog">
-    {% for p in posts %}
-    <li class="el">
-        <a href="{{p.get_absolute_url}}">
-            <div class="left-content">
-                <h2>{{p.title}}</h2>
-                <p class="content">{{p.content}}</p>
-            </div>
-            <div class="right-content">
-                <h4>{{p.price}}₽</h4>
-                <p>Сроки до: {{p.time_over}}</p>
-                <p class="category">{{p.category}}</p>
-            </div>
-        </a>
-    </li>
-    {% endfor %}
-</ul>
 {% endblock task_list %}

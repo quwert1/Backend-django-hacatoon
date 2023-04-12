@@ -4,57 +4,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="{% static 'website/css/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/catalog.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'website/css/sign_up.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/registration.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>{{title}}</title>
 </head>
 <body>
-    {% block navcontent %}
-    <nav>
-        <div class="container">
-            <div class="logo">
-                <a href="{% url 'catalogIT' %}" class="logo-url">
-                    <img src="{% static 'website/img/logo_kach.svg' %}" alt="">
-                    <div class="logo-text">
-                        <p>Search</p>
-                        <p>Specialists</p>
-                        <p>Services</p>
-                    </div>
-                </a>
-            </div>
+<h1>{{title}}</h1>
+<div class="reg-form-block reg-form-block-auth">
+    <form method="post" class="reg-form auth-form">
+        {% csrf_token %}
 
-            <ul class="nav-links">
-                <li><a href="{% url 'catalogIT' %}">Каталог</a></li>
-                <li><a href="{% url 'add_taskIT' %}">Создать объявление</a></li>
-                <li><a href="{% url 'about_us' %}">О нас</a></li>
-                <li class="user-auth-block">
-                    {% if request.user.is_authenticated %}
-                    <li>{{user.username}} | <a href="{% url 'profile' %}">профиль</a></li>
-                    {% else %}
-                    <a href="{% url 'registration' %}">Зарегестрироваться</a>
-                    <span>|</span>
-                    <a href="{% url 'sign_up' %}">Войти</a>
-                    {% endif %}
-                </li>
-            </ul>
-        </div>
-    </nav>
-    {% endblock navcontent %}
+        <div class="form-error">{{ form.non_field_errors }}</div>
 
-    {% block form %}
-    {% endblock form %}
+        {% for f in form %}
+        <p class="input-reg-el input-auth-el"><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+        <div class="form-error">{{ f.errors }}</div>
+        {% endfor %}
+        <button type="submit">Войти</button>
 
-    {% block task_list %}
-    {% endblock task_list %}
+        <a href="{% url 'registration' %}" class="login-if-us-reg">Нет аккаунта? Зарегестрироваться</a>
+    </form>
+</div>
 
-    {% block content %}
-    {% endblock content %}
 
-    {% block profile %}
-    {% endblock profile %}
 
 
 <svg xmlns="http://www.w3.org/2000/svg" width="367" height="521" viewBox="0 0 367 521" fill="none" class="cloud1">
@@ -328,3 +304,9 @@
     </svg>
 </body>
 </html>
+
+
+
+
+
+

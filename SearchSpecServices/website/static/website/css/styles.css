@@ -12,6 +12,7 @@ body {
 nav {
     box-shadow: 0px 0px 1px 0px black;
     padding: 10px 0px;
+    background-color: white;
 }
 nav .container {
     display: flex;
@@ -49,6 +50,7 @@ nav .logo .logo-text {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 40px;
     font-size: 0px;
 }
 .nav-links * {
@@ -60,12 +62,7 @@ nav .logo .logo-text {
     color: white;
 }
 .user-auth-block {
-    padding: 8px 15px;
-    background-color: #8860D0;
-    -webkit-border-radius: 13px;
-    -moz-border-radius: 13px;
-    border-radius: 13px;
-    margin-left: 80px;
+    display: none;
 }
 .user-auth-block * {
     color: white !important;
@@ -76,5 +73,62 @@ nav .logo .logo-text {
     font-size: 30px;
     vertical-align: -3px;
     user-select: none;
+}
+
+body, * {
+  padding: 0;
+  margin: 0;
+  
+}
+
+body {
+  background-image: linear-gradient(135deg, #3A3E87 9.38%, #0D2C65 32.81%, #0E1045 69.22%, #221245 98.44%);
+  background-size: 100vw 100vh;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+.cloud1 {
+  position: absolute;
+  width: 366.79px;
+  height: 492.8px;
+  left: 66px;
+  top: 98px;
+  z-index: -1;
+}
+.cloud2 {
+  position: absolute;
+  width: 159px;
+  height: 149px;
+  left: -20px;
+  top: 593px;
+  z-index: -1;
+  
+}
+.cloud3 {
+  position: absolute;
+  width: 254px;
+  height: 226px;
+  left: 128px;
+  top: 816px;
+  z-index: -1;
+}
+.cloud4 {
+  z-index: -1;
+  position: absolute;
+  width: 431px;
+  height: 579.25px;
+  right: 0;
+  /* left: 1521px; */
+  top: 85px;
+  
+}
+.cloud5 {
+  position: absolute;
+  width: 310px;
+  height: 290px;
+  /* left: 1675px; */
+  right: 0;
+  top: 842px;
+  z-index: -1;
 }
 

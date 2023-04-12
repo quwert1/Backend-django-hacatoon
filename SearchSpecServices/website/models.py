@@ -35,3 +35,17 @@ class Category(models.Model):
         verbose_name = 'Категории'
         verbose_name_plural = 'Категории'
         ordering = ['name']
+
+# class ChooseRole(models.Model):
+#     name = models.CharField(max_length=100, db_index=True, verbose_name='Роль пользователя')
+#
+#     def __str__(self):
+#         return self.name
+#
+#     def get_absolute_url(self):
+#         return reverse('role', kwargs={'role_id': self.pk})
+#
+#     class Meta:
+#         verbose_name = 'Роль'
+#         verbose_name_plural = 'Роли'
+#         ordering = ['name']
