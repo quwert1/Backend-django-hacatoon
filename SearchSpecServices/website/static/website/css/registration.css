@@ -4,7 +4,6 @@ body {
 	font-family: 'Roboto';
 }
 
-
 body {
   background-image: linear-gradient(135deg, #3A3E87 9.38%, #0D2C65 32.81%, #0E1045 69.22%, #221245 98.44%);
   background-size: 100vw 100vh;
@@ -19,7 +18,7 @@ h1 {
 
 .reg-form-block {
 	width: 50vw;
-	height: 70vh;
+	height: 60vh;
 	background-color: #0E1045;
 	padding: 30px;
 	box-sizing: border-box;
@@ -57,12 +56,20 @@ h1 {
 	border-radius: 8px;
 	margin: 0px;
 	padding: 25px;
-	padding-left: 60px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
 	font-size: 18px;
+}
+
+.block-inputs {
+    display: flex;
+    flex-wrap: wrap;
+	justify-content: center;
+	align-items: space-between;
+    column-gap: 70px;
+	row-gap: 30px;
 }
 .reg-form label {
 	display: block;
@@ -76,9 +83,7 @@ h1 {
 	outline: none;
 	padding: 5px;
 }
-.input-reg-el {
-	width: 50%;
-}
+
 .reg-form button {
 	padding: 10px;
 	border-radius: 8px;

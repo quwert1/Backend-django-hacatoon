@@ -5,10 +5,16 @@ from django.contrib.auth.views import LoginView
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.contrib.auth import logout, login
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.viewsets import GenericViewSet
+from rest_framework import generics, viewsets, mixins
 
 from .models import *
 from .forms import *
 from .utils import *
+from .serializers import *
+from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 
 
 def main_page(request):
@@ -70,18 +76,51 @@ def logout_user(request):
     return redirect('home')
 
 
-class CatalogIT(ListView):
-    model = TaskIT
-    template_name = 'website/catalogIT.html'
-    context_object_name = 'posts'
-    paginate_by = 15
+# class CatalogIT(ListView):
+#     model = TaskIT
+#     template_name = 'website/catalogIT.html'
+#     context_object_name = 'posts'
+#     paginate_by = 15
+#
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['title'] = 'Каталог заказов IT'
+#         context['cats'] = Category.objects.all()
+#         context['cat_selected'] = 0
+#         return context
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Каталог заказов IT'
-        context['cats'] = Category.objects.all()
-        context['cat_selected'] = 0
-        return context
+
+# class CatalogAPIList(generic.ListCreateAPIView):
+#     queryset = TaskIT.objects.all()
+#
+#
+# class CatalogAPIUpdate(generic.RetrieveUpdateAPIView):
+
+
+
+
+class TaskITAPIList(generics.ListCreateAPIView):
+    queryset = TaskIT.objects.all()
+    serializer_class = TaskITSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+
+
+class TaskITAPIUpdate(generics.RetrieveUpdateAPIView):
+    queryset = TaskIT.objects.all()
+    serializer_class = TaskITSerializer
+    permission_classes = (IsOwnerOrReadOnly, )
+
+
+class TaskITAPIDestroy(generics.RetrieveDestroyAPIView):
+    queryset = TaskIT.objects.all()
+    serializer_class = TaskITSerializer
+    permission_classes = (IsAdminOrReadOnly, )
+
+
+
+
+
+
 
 def show_category(request, cat_id):
     posts = TaskIT.objects.filter(category=cat_id)

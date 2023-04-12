@@ -21,7 +21,6 @@ class RegisterUserCustomerForm(UserCreationForm):
     first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
     password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-    # role = forms.ModelMultipleChoiceField(queryset=ChooseRole.objects.all(), label='Вы')
 
     class Meta:
         model = User
@@ -34,11 +33,11 @@ class RegisterUserPerformerForm(UserCreationForm):
     first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
     password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-    # role = forms.ModelMultipleChoiceField(queryset=ChooseRole.objects.all(), label='Вы')
 
     class Meta:
         model = User
         fields = ('username', 'last_name', 'first_name', 'email', 'password1', 'password2')
+
 
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))

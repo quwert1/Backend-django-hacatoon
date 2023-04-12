@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from django.contrib.auth.models import User
+
 class TaskIT(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
@@ -10,6 +12,7 @@ class TaskIT(models.Model):
     time_update = models.DateTimeField(auto_now_add=True, null=True)
     place = models.CharField(max_length=255)
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -36,16 +39,3 @@ class Category(models.Model):
         verbose_name_plural = 'Категории'
         ordering = ['name']
 
-# class ChooseRole(models.Model):
-#     name = models.CharField(max_length=100, db_index=True, verbose_name='Роль пользователя')
-#
-#     def __str__(self):
-#         return self.name
-#
-#     def get_absolute_url(self):
-#         return reverse('role', kwargs={'role_id': self.pk})
-#
-#     class Meta:
-#         verbose_name = 'Роль'
-#         verbose_name_plural = 'Роли'
-#         ordering = ['name']

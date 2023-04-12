@@ -21,10 +21,12 @@
     </div>
     <form method="post" class="reg-form">
         {% csrf_token %}
-        {% for f in form %}
-        <p class="input-reg-el"><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
-        <div class="form-error">{{ f.errors }}</div>
-        {% endfor %}
+        <div class="block-inputs">
+            {% for f in form %}
+            <p class="input-reg-el"><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+            <div class="form-error">{{ f.errors }}</div>
+            {% endfor %}
+        </div>
         <button type="submit">Зарегестрироваться</button>
 
         <a href="{% url 'sign_up' %}" class="login-if-us-reg">Есть аккаунт? Войти</a>
