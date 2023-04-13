@@ -14,6 +14,14 @@ class AddTaskIT_Form(forms.ModelForm):
         # fields = ['title', 'content', 'category']
         fields = '__all__'
 
+class ContactCustomerForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    class Meta:
+        model = TaskIT
+        fields = '__all__'
+
 class RegisterUserCustomerForm(UserCreationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-input'}))

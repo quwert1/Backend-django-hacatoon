@@ -16,7 +16,7 @@
             </div>
 
             <ul class="nav-links">
-                <li><a href="{% url 'catalogIT_cust' %}">Мои объявления</a></li>
+                <li><a href="{% url 'catalogIT_cust' %}" style="color: #000;">Мои объявления</a></li>
                 <li><a href="{% url 'add_taskIT' %}">Создать объявление</a></li>
                 <li><a href="{% url 'about_us' %}">О нас</a></li>
                 <li class="user-auth-block">
@@ -66,9 +66,10 @@
         <ul class="block-catalog-links">
             {% for p in posts %}
             {{username}}
-            {% if p.user == username %}
+
+
             <li class="el">
-                <a href="{{p.get_absolute_url}}">
+<!--                <a href="{{p.get_absolute_url}}">-->
                     <div class="top-content">
                         <h2>{{p.title|truncatechars:60}}</h2>
                         <p class="content">{{p.content|truncatechars:200}}</p>
@@ -83,11 +84,10 @@
                             <p class="price task-object">{{p.price}}р</p>
                         </div>
                     </div>
-                </a>
+<!--                </a>-->
             </li>
             <div class="cut"></div>
-            {% else %}
-            {% endif %}
+
             {% endfor %}
         </ul>
 

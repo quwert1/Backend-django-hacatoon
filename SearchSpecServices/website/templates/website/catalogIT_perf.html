@@ -16,11 +16,11 @@
             </div>
 
             <ul class="nav-links">
-                <li><a href="{% url 'catalogIT_perf' %}">Каталог</a></li>
-                <li><a href="{% url 'about_us' %}">О нас</a></li>
+                <li><a href="{% url 'catalogIT_perf' %}" style="color: #000;">Каталог</a></li>
+                <li><a href="{% url 'about_us_perf' %}">О нас</a></li>
                 <li class="user-auth-block">
                     {% if request.user.is_authenticated %}
-                    <li>{{user.username}} | <a href="{% url 'profile' %}">профиль</a></li>
+                    <li>{{user.username}} | <a href="{% url 'profile_perf' %}">профиль</a></li>
                     {% else %}
                     <a href="{% url 'registration' %}">Зарегестрироваться</a>
                     <span>|</span>

@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'website/css/not_found.css' %}">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <div class="item">
+      <div class="wrap">
+        <img src="{% static 'website/img/face-sad.png' %}" alt="">
+        <h1>404</h1>
+        <h3>The page you're looking for can't be found.</h3>
+      </div>
+      <img src="{% static 'website/img/shutterstock_478917859.png' %}" alt="" class="robot">
+    </div>
+  </div>
+</body>
+</html>

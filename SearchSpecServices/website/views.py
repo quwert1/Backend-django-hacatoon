@@ -24,6 +24,9 @@ def main_page(request):
 def about_us(request):
     return render(request, 'website/about_us.html', {'title': 'О нас'})
 
+def about_us_perf(request):
+    return render(request, 'website/about_us_perf.html', {'title': 'О нас'})
+
 
 class RegisterUserCustomer(DataMixin, CreateView):
     role = 'Заказчик'
@@ -39,7 +42,7 @@ class RegisterUserCustomer(DataMixin, CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('catalogIT')
+        return redirect('catalogIT_cust')
 
 class RegisterUserPerformer(DataMixin, CreateView):
     role = 'Исполнитель'
@@ -67,10 +70,13 @@ class LoginUser(DataMixin, LoginView):
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_success_url(self):
-        return reverse_lazy('profile')
+        return reverse_lazy('who_are_you')
 
 def profile(request):
     return render(request, 'website/profile.html', {'title': 'Профиль'})
+
+def profile_perf(request):
+    return render(request, 'website/profile_perf.html', {'title': 'Профиль'})
 
 def logout_user(request):
     logout(request)
@@ -87,7 +93,7 @@ class CatalogIT(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Каталог заказов IT'
         context['cats'] = Category.objects.all()
-        context['username'] = LoginUser.objects.all()
+        # context['username'] = LoginUser.objects.all()
         context['cat_selected'] = 0
         return context
 
@@ -103,12 +109,6 @@ class CatalogIT_perf(ListView):
         context['cats'] = Category.objects.all()
         context['cat_selected'] = 0
         return context
-
-#
-# class TaskITAPIList(generics.ListCreateAPIView):
-#     queryset = TaskIT.objects.all()
-#     serializer_class = TaskITSerializer
-#     permission_classes = (IsAdminOrReadOnly, )
 
 
 class TaskITAPIUpdate(generics.RetrieveUpdateAPIView):
@@ -142,31 +142,32 @@ def show_category(request, cat_id):
 def show_post(request, post_id):
     post = get_object_or_404(TaskIT, pk=post_id)
 
+    if request.method == 'POST':
+        form = ContactCustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('catalogIT_perf')
+    else:
+        form = ContactCustomerForm()
+
     context = {
         'post': post,
         'title': post.title,
         'category_selected': post.category_id,
+        'form': form,
     }
     return render(request, 'website/post.html', context=context)
 
 def show_post_cust(request, post_id):
-    # post_cust = get_object_or_404(TaskIT, pk=post_id)
-    user_post = get_object_or_404(TaskIT, User=user)
+    post = get_object_or_404(TaskIT, pk=post_id)
 
     context = {
-        'user_posts': user_post,
+        'post': post,
         'title': user_post.title,
-        'category_selected': post_cust.category_id,
+        'category_selected': post.category_id,
     }
     return render(request, 'website/post_cust.html', context=context)
 
-# class AddTaskIT(CreateView, generics.RetrieveDestroyAPIView):
-#     form_class = AddTaskIT_Form
-#     template_name = 'website/add_taskIT.html'
-#
-#     queryset = TaskIT.objects.all()
-#     serializer_class = TaskITSerializer
-#     permission_classes = (IsAdminOrReadOnly,)
 
 def add_taskIT (request):
     if request.method == 'POST':
@@ -177,3 +178,11 @@ def add_taskIT (request):
     else:
         form = AddTaskIT_Form()
     return render(request, 'website/add_taskIT.html', {'title': 'Add article', 'form': form})
+
+
+def who_are_you (request):
+    return render(request, 'website/who_are_you.html', {'title': 'Выберите свою категорию'})
+
+
+def pageNotFound (request, exception):
+    return render(request, 'website/not_found.html', status=404)

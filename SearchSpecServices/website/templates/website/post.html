@@ -1,4 +1,36 @@
 {% extends 'website/base.html' %}
+{% load static %}
+
+{% block navcontent %}
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="{% url 'catalogIT_perf' %}" class="logo-url">
+                    <img src="{% static 'website/img/logo_kach.svg' %}" alt="">
+                    <div class="logo-text">
+                        <p>Search</p>
+                        <p>Specialists</p>
+                        <p>Services</p>
+                    </div>
+                </a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="{% url 'catalogIT_perf' %}" style="color: #000;">Каталог</a></li>
+                <li><a href="{% url 'about_us_perf' %}">О нас</a></li>
+                <li class="user-auth-block">
+                    {% if request.user.is_authenticated %}
+                    <li>{{user.username}} | <a href="{% url 'profile_perf' %}">профиль</a></li>
+                    {% else %}
+                    <a href="{% url 'registration' %}">Зарегестрироваться</a>
+                    <span>|</span>
+                    <a href="{% url 'sign_up' %}">Войти</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% endblock navcontent %}
 
 {% block content %}
 <div class="wrap-card">
@@ -25,7 +57,7 @@
                 <a href="#">Связаться с заказчиком</a>
             </div>
             <div class="customer-info">
-                {{post.user}}
+                <h3>{{post.user}}</h3>
             </div>
         </div>
     </div>

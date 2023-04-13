@@ -17,7 +17,7 @@
 
             <ul class="nav-links">
                 <li><a href="{% url 'catalogIT_cust' %}">Мои объявления</a></li>
-                <li><a href="{% url 'add_taskIT' %}">Создать объявление</a></li>
+                <li><a href="{% url 'add_taskIT' %}" style="color: #000;">Создать объявление</a></li>
                 <li><a href="{% url 'about_us' %}">О нас</a></li>
                 <li class="user-auth-block">
                     {% if request.user.is_authenticated %}
@@ -34,7 +34,7 @@
     {% endblock navcontent %}
 
 {% block form %}
-<form action="{% url 'add_taskIT' %}" method="post">
+<form action="{% url 'add_taskIT' %}" method="post" class="wrap-add_post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Добавить</button>

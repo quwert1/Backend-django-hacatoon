@@ -1,0 +1,19 @@
+.reg-form-block-auth {
+	width: 400px !important;
+	height: 420px !important;
+}
+
+.input-auth-el {
+	width: 207px !important;
+}
+.auth-form {
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	padding: 0px;
+}
+.reg-form {
+	padding: 0px !important;
+	padding-bottom: 30px !important;
+}

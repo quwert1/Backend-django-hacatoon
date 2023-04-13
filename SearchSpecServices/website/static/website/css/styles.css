@@ -90,6 +90,40 @@ nav .logo .logo-text {
     user-select: none;
 }
 
+.wrap-add_post {
+    padding-top: 50px;
+    color: white;
+    max-width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    vertical-align: top;
+}
+.wrap-add_post input, textarea {
+    width: 100%;
+    resize: none;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 5px 10px;
+    max-height: 70px;
+}
+.wrap-add_post button {
+    cursor: pointer;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    background-color: white;
+    opacity: .8;
+    transition: .5s;
+}
+.wrap-add_post button:hover {
+    opacity: 1;
+}
+
 body, * {
   padding: 0;
   margin: 0;
